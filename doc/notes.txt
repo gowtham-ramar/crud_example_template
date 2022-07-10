@@ -1,0 +1,10 @@
+pip install django==3.1
+pip install mysqlclient==2.1.0
+pip install mysql-connector-python==8.0.28
+
+GRANT ALL PRIVILEGES on *.* to 'root'@'localhost' IDENTIFIED BY 'Gowtham@123';
+FLUSH PRIVILEGES;
+#192.168.184.128
+create user 'gowtham'@'localhost' identified by 'gow@123';
+grant usage on *.* to 'gowtham'@'localhost';
+grant all privileges on *.* to 'gowtham'@'localhost'

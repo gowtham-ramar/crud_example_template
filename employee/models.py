@@ -31,3 +31,26 @@ class Mark(models.Model):
     Mark = models.CharField(max_length=100)
     class Meta:
         db_table = "Mark"
+
+
+
+class StudentForeign(models.Model):
+    studid = models.IntegerField(primary_key=True)
+    Name = models.CharField(max_length=100)
+    class Meta:
+        db_table = "StudentForeign"
+
+
+class SubjectForeign(models.Model):
+    Subid = models.IntegerField(primary_key=True)
+    SubjectName = models.CharField(max_length=100)
+    class Meta:
+        db_table = "SubjectForeign"
+
+class MarkForeign(models.Model):
+    Markid = models.IntegerField(primary_key=True)
+    Studid = models.ForeignKey(StudentForeign, to_field='studid',on_delete=models.CASCADE)
+    Subid = models.ForeignKey(SubjectForeign, to_field='Subid',on_delete=models.CASCADE)
+    Mark = models.IntegerField()
+    class Meta:
+        db_table = "MarkForeign"

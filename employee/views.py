@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from employee.forms import EmployeeForm
-from employee.models import Employee
+from employee.models import Employee,MarkForeign
 from django.db import connection
 
 def my_custom_sql(sql):
@@ -30,9 +30,13 @@ def show(request):
     return render(request,"show.html",{'employees':employees})
 def test_sample(request):
     result=my_custom_sql("select Name,Mark,SubjectName from Mark m join Subject s on m.Subid=s.Subid join  Student st on st.studid=m.studid;")
-    print("result start")
+    print("result start for RAW Query")
     print(result)
-    print("result end")
+    print("result end for RAW Query")
+    print("result start for ORM")
+    print(MarkForeign.objects.values('Studid__Name','Subid__SubjectName','Mark'))
+    print("result end for ORM")
+    
     return redirect('/employee/show')
     
 def edit(request, id):

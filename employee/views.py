@@ -1,6 +1,14 @@
 from django.shortcuts import render, redirect
 from employee.forms import EmployeeForm
 from employee.models import Employee
+from django.db import connection
+
+def my_custom_sql(sql):
+    cursor = connection.cursor()    
+    cursor.execute(sql)
+    row = cursor.fetchall()
+    return row
+
 # Create your views here.
 def emp(request):
     if request.method == "POST":
@@ -20,6 +28,13 @@ def emp(request):
 def show(request):
     employees = Employee.objects.all()
     return render(request,"show.html",{'employees':employees})
+def test_sample(request):
+    result=my_custom_sql("select Name,Mark,SubjectName from Mark m join Subject s on m.Subid=s.Subid join  Student st on st.studid=m.studid;")
+    print("result start")
+    print(result)
+    print("result end")
+    return redirect('/employee/show')
+    
 def edit(request, id):
     employee = Employee.objects.get(id=id)
     return render(request,'edit.html', {'employee':employee})

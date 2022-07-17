@@ -16,7 +16,7 @@
 # Build Model Migration to DB Start 
     python manage.py makemigrations
     python manage.py migrate
-# Bu ild Model Migration to DB End
+# Build Model Migration to DB End
 
 # Create User
     python manage.py createsuperuser
@@ -24,3 +24,5 @@
 
 #gowtham-ramar 
 #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
+
+#et
